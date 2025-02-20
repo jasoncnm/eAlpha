@@ -6,16 +6,18 @@
    $Notice: $
    ======================================================================== */
 
+#include <Engine.h>
 
-namespace Engine1
+class SandBox : public Engine::Application
 {
-    _declspec(dllimport) void Print();
-}
+public:
+    SandBox(){}
+    ~SandBox(){}
+};
 
 
-void main()
+Engine::Application Engine::CreateApplication()
 {
-
-    Engine1::Print();
-    
+    SandBox sandBox;
+    return sandBox;
 }
