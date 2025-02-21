@@ -17,6 +17,9 @@
 #error Engine Only Support Windows!
 #endif
 
+#include "Types.h"
+#define BIT(x) (1 << x)
+
 
 #define CORE_H
 #endif
