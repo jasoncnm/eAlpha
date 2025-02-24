@@ -52,7 +52,7 @@ namespace Engine
             return ss.str();
         }
 
-        EVENT_CLASS_TYPE(MouseScrooled);
+        EVENT_CLASS_TYPE(MouseScrolled);
         EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput);
         
     private:
@@ -66,10 +66,11 @@ namespace Engine
         inline i32 GetButton() const { return button; }
 
         EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput);
-        
-    private:
+
+    protected:
         MouseButtonEvent(i32 button)
             : button(button) {}
+    private:
         i32 button;
     };
 
@@ -83,7 +84,7 @@ namespace Engine
         std::string ToString() const override
         {
             std::stringstream ss;
-            ss << "MouseButtonPressedEvent: " << button;
+            ss << "MouseButtonPressedEvent: " << GetButton();
             return ss.str();
         }
 
@@ -101,7 +102,7 @@ namespace Engine
         std::string ToString() const override
         {
             std::stringstream ss;
-            ss << "MouseReleasedEvent: " << button;
+            ss << "MouseReleasedEvent: " << GetButton();
             return ss.str();
         }
 

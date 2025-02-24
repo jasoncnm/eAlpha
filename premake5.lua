@@ -1,11 +1,19 @@
-workspace "GameEngine1_Test"
+workspace "eAlpha"
     architecture "x64"
     configurations { "Debug", "Release", "Dist" }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "GameEngine1_Test"
-    location "GameEngine1_Test"
+IncludeDir = {}
+IncludeDir["GLFW"] = "eAlpha/vendor/GLFW/include"
+IncludeDir["Glad"] = "eAlpha/vendor/Glad/include"
+
+
+include "eAlpha/vendor/GLFW"
+include "eAlpha/vendor/Glad"
+
+project "eAlpha"
+    location "eAlpha"
     kind "SharedLib"
     language "C++"
 
@@ -13,14 +21,23 @@ project "GameEngine1_Test"
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
     pchheader "pch.h"
-    pchsource "GameEngine1_Test/src/pch.cpp"
+    pchsource "eAlpha/src/pch.cpp"
 
     files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
 
     includedirs
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}"
+    }
+
+    links
+    {
+        "GLFW",
+        "Glad",
+        "opengl32.lib"
     }
 
     filter "system:windows"
@@ -28,7 +45,7 @@ project "GameEngine1_Test"
         staticruntime "On"
         systemversion "latest"
 
-        defines { "ENGINE_PLATFORM_WINDOWS",  "ENGINE_BUILD_DLL" }
+        defines { "ENGINE_PLATFORM_WINDOWS",  "ENGINE_BUILD_DLL", "GLFW_INCLUDE_NONE" }
 
         postbuildcommands
         {
@@ -38,15 +55,18 @@ project "GameEngine1_Test"
         buildoptions "/utf-8 "
 
     filter "configurations:Debug"
-        defines { "ENGINE_DEBUG" }
+        defines { "ENGINE_ENABLE_ASSERTS", "ENGINE_DEBUG" }
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines { "ENGINE_RELEASE" }
+        buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines { "ENGINE_DIST" }
+        buildoptions "/MD"
         optimize "On"
 
  
@@ -62,13 +82,13 @@ project "SandBox"
 
     includedirs
     {
-        "GameEngine1_Test/vendor/spdlog/include",
-        "GameEngine1_Test/src"
+        "eAlpha/vendor/spdlog/include",
+        "eAlpha/src"
     }
 
     links
     {
-        "GameEngine1_Test"
+        "eAlpha"
     }
 
     filter "system:windows"
@@ -81,13 +101,16 @@ project "SandBox"
         buildoptions "/utf-8 "
 
     filter "configurations:Debug"
-        defines { "ENGINE_DEBUG" }
+        defines { "ENGINE_ENABLE_ASSERTS", "ENGINE_DEBUG"  }
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines { "ENGINE_RELEASE" }
+        buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines { "ENGINE_DIST" }
+        buildoptions "/MD"
         optimize "On"

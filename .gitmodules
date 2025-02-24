@@ -1,6 +1,6 @@
-[submodule "GameEngine1_Test/vendor/spdlog"]
-	path = GameEngine1_Test/vendor/spdlog
+[submodule "eAlpha/vendor/spdlog"]
+	path = eAlpha/vendor/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "GameEngine1_Test/vendor/glfw"]
-	path = GameEngine1_Test/vendor/glfw
+[submodule "eAlpha/vendor/glfw"]
+	path = eAlpha/vendor/glfw
 	url = https://github.com/jasoncnm/glfw

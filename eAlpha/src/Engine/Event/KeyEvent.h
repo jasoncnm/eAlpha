@@ -20,7 +20,7 @@ namespace Engine
         EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput);
 
     protected:
-        keyEvent(i32 keycode)
+        KeyEvent(i32 keycode)
                 : m_KeyCode(keycode) {}
 
         i32 m_KeyCode;
@@ -46,6 +46,23 @@ namespace Engine
         
     private:
         i32 m_RepeatCount;
+
+    };
+
+    class ENGINE_API KeyReleasedEvent : public KeyEvent
+    {
+    public:
+        KeyReleasedEvent(i32 keycode)
+                : KeyEvent(keycode) {}
+
+        std::string ToString() const override
+        {
+            std::stringstream ss;
+            ss << "KeyReleasedEvent: " << m_KeyCode;
+            return ss.str();
+        }
+
+        EVENT_CLASS_TYPE(KeyReleased);
 
     };
 
