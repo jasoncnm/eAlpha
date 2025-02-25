@@ -27,11 +27,13 @@ namespace Engine
     void LayerStack::PushLayer(Layer * layer)
     {
         layerInsert = layers.emplace(layerInsert, layer);
+        layer->OnAttatch();
     }
 
     void LayerStack::PushOverlay(Layer * overlay)
     {
         layers.emplace_back(overlay);
+        overlay->OnAttatch(); 
     }
     
     void LayerStack::PopLayer(Layer * layer)

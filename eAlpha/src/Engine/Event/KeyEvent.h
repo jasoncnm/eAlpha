@@ -66,6 +66,25 @@ namespace Engine
 
     };
 
+    class ENGINE_API KeyTypedEvent : public KeyEvent
+    {
+public:
+        KeyTypedEvent(i32 keycode)
+            : KeyEvent(keycode) {}
+
+        
+        std::string ToString() const override
+        {
+            std::stringstream ss;
+            ss << "KeyTypedEvent: " << m_KeyCode;
+            return ss.str();
+        }
+
+        EVENT_CLASS_TYPE(KeyTyped);
+        
+
+    };
+
 }
 
 #define KEYEVENT_H

@@ -15,8 +15,12 @@
 namespace Engine
 {
 
+    Application * Application::instance = nullptr;
+    
     Application::Application()
     {
+        ENGINE_CORE_ASSERT(!instance, "Application already exists!");
+        instance = this;
         
         window = std::unique_ptr<Window>(Window::Create());
         window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
@@ -36,7 +40,7 @@ namespace Engine
     {
 
         EventDispatcher dispatcher(event);
-        std::function<bool(WindowCloseEvent&)> func = std::bind(&Application::OnWindowClose, this, std::placeholders::_1);
+        std::function<bool(WindowCloseEvent&)> func = BIND_EVENT_FUNCTION(Application::OnWindowClose);
         dispatcher.Dispatch<WindowCloseEvent>(func);
         
         // ENGINE_CORE_TRACE("{0}", event);

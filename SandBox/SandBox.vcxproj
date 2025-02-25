@@ -137,9 +137,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\SanboxApp.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\SanboxApp.cpp" />
   </ItemGroup>
   <ItemGroup>

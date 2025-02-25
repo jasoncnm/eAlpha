@@ -27,6 +27,7 @@
 
 #include "Types.h"
 #define BIT(x) (1 << x)
+#define BIND_EVENT_FUNCTION(X) std::bind(&X, this, std::placeholders::_1)
 
 
 #define CORE_H

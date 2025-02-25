@@ -90,6 +90,13 @@ namespace Engine
             _data.EventCallback(event);
         });
 
+        glfwSetCharCallback(window, [](GLFWwindow * _window, u32 codePoint)
+        {
+            WindowData & _data = *(WindowData *)glfwGetWindowUserPointer(_window);
+            KeyTypedEvent event(codePoint);
+            _data.EventCallback(event);
+        });
+        
         glfwSetWindowCloseCallback(window, [](GLFWwindow * _window)
         {
             WindowData & _data = *(WindowData *)glfwGetWindowUserPointer(_window);
