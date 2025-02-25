@@ -4,3 +4,9 @@
 [submodule "eAlpha/vendor/glfw"]
 	path = eAlpha/vendor/glfw
 	url = https://github.com/jasoncnm/glfw
+[submodule "imgui"]
+	path = imgui
+	url = https://github.com/jasoncnm/imgui
+[submodule "eAlpha/vendor/imgui"]
+	path = eAlpha/vendor/imgui
+	url = https://github.com/jasoncnm/imgui
