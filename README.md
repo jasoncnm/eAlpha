@@ -3,8 +3,11 @@
 
 # Depenencies 
  GLFW
+ 
  GLAD
+ 
  IMGUI
+ 
  SPDLOG
 
 # Quick Start
