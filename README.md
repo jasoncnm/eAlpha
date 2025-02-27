@@ -6,7 +6,7 @@
 
  [GLFW](https://github.com/glfw/glfw)
 
- Lua
+ [Lua](https://www.lua.org/)
  
  [GLAD](https://glad.dav1d.de/)
  
