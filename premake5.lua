@@ -4,6 +4,8 @@ workspace "eAlpha"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+startproject "SandBox"
+
 IncludeDir = {}
 IncludeDir["GLFW"] = "eAlpha/vendor/GLFW/include"
 IncludeDir["Glad"] = "eAlpha/vendor/Glad/include"
@@ -18,6 +20,8 @@ project "eAlpha"
     location "eAlpha"
     kind "SharedLib"
     language "C++"
+
+    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -46,7 +50,6 @@ project "eAlpha"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines { "ENGINE_PLATFORM_WINDOWS",  "ENGINE_BUILD_DLL", "GLFW_INCLUDE_NONE" }
@@ -59,18 +62,18 @@ project "eAlpha"
         buildoptions "/utf-8 "
 
     filter "configurations:Debug"
-        defines { "ENGINE_ENABLE_ASSERTS", "ENGINE_DEBUG" }
-        buildoptions "/MDd"
+        defines { "ENGINE_DEBUG" }
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines { "ENGINE_RELEASE" }
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines { "ENGINE_DIST" }
-        buildoptions "/MD"
+	runtime "Release"
         optimize "On"
 
  
@@ -79,6 +82,8 @@ project "SandBox"
     kind "ConsoleApp"
     language "C++"
 
+    staticruntime "off"
+    
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -97,7 +102,6 @@ project "SandBox"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines { "ENGINE_PLATFORM_WINDOWS" }
@@ -105,16 +109,16 @@ project "SandBox"
         buildoptions "/utf-8 "
 
     filter "configurations:Debug"
-        defines { "ENGINE_ENABLE_ASSERTS", "ENGINE_DEBUG"  }
-        buildoptions "/MDd"
+        defines { "ENGINE_DEBUG"  }
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines { "ENGINE_RELEASE" }
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines { "ENGINE_DIST" }
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
