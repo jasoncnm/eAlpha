@@ -10,4 +10,6 @@
  
  SPDLOG
 
+ Premake5
+ 
 # Quick Start
