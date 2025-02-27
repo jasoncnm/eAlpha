@@ -16,4 +16,10 @@
 
  [Premake5](https://github.com/premake/premake-core)
  
+# Building Project
+ In Windows Command Prompt run:
+ 
+    $ build.bat
+
 # Quick Start
+After building the project, open eAlpha.sln with vs2022
