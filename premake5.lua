@@ -11,10 +11,12 @@ IncludeDir["GLFW"] = "eAlpha/vendor/GLFW/include"
 IncludeDir["Glad"] = "eAlpha/vendor/Glad/include"
 IncludeDir["Imgui"] = "eAlpha/vendor/Imgui"
 
-include "eAlpha/vendor/GLFW"
-include "eAlpha/vendor/Glad"
-include "eAlpha/vendor/Imgui"
 
+group "Dependencies"
+     include "eAlpha/vendor/GLFW"
+     include "eAlpha/vendor/Glad"
+     include "eAlpha/vendor/Imgui"
+group ""
 
 project "eAlpha"
     location "eAlpha"
@@ -56,7 +58,7 @@ project "eAlpha"
 
         postbuildcommands
         {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SandBox")
+            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/SandBox/\"")
         }
 
         buildoptions "/utf-8 "

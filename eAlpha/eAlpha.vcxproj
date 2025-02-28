@@ -95,7 +95,7 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\eAlpha\eAlpha.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\eAlpha\eAlpha.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\eAlpha\eAlpha.dll ..\bin\Debug-windows-x86_64\SandBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\eAlpha\eAlpha.dll ..\bin\Debug-windows-x86_64\SandBox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\eAlpha\eAlpha.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\eAlpha\eAlpha.dll "..\bin\Debug-windows-x86_64\SandBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\eAlpha\eAlpha.dll "..\bin\Debug-windows-x86_64\SandBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,7 +123,7 @@
       <ImportLibrary>..\bin\Release-windows-x86_64\eAlpha\eAlpha.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\eAlpha\eAlpha.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\eAlpha\eAlpha.dll ..\bin\Release-windows-x86_64\SandBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\eAlpha\eAlpha.dll ..\bin\Release-windows-x86_64\SandBox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\eAlpha\eAlpha.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\eAlpha\eAlpha.dll "..\bin\Release-windows-x86_64\SandBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\eAlpha\eAlpha.dll "..\bin\Release-windows-x86_64\SandBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -151,7 +151,7 @@
       <ImportLibrary>..\bin\Dist-windows-x86_64\eAlpha\eAlpha.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\eAlpha\eAlpha.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\eAlpha\eAlpha.dll ..\bin\Dist-windows-x86_64\SandBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\eAlpha\eAlpha.dll ..\bin\Dist-windows-x86_64\SandBox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\eAlpha\eAlpha.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\eAlpha\eAlpha.dll "..\bin\Dist-windows-x86_64\SandBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\eAlpha\eAlpha.dll "..\bin\Dist-windows-x86_64\SandBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -164,22 +164,26 @@
     <ClInclude Include="src\Engine\Event\KeyEvent.h" />
     <ClInclude Include="src\Engine\Event\MouseEvent.h" />
     <ClInclude Include="src\Engine\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Engine\Input.h" />
     <ClInclude Include="src\Engine\Layer.h" />
     <ClInclude Include="src\Engine\LayerStack.h" />
     <ClInclude Include="src\Engine\Log.h" />
     <ClInclude Include="src\Engine\Types.h" />
     <ClInclude Include="src\Engine\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp" />
     <ClCompile Include="src\Engine\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Engine\Input.cpp" />
     <ClCompile Include="src\Engine\Layer.cpp" />
     <ClCompile Include="src\Engine\LayerStack.cpp" />
     <ClCompile Include="src\Engine\Log.cpp" />
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
