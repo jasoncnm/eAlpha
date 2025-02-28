@@ -4,7 +4,7 @@
 # Depenencies 
  OpenGL 3.2+
 
- [GLFW]([https://github.com/glfw/glfw](https://github.com/jasoncnm/glfw/tree/c63d4601ad547be6b6559ec1e792ec3586ab47c2))
+ [GLFW](https://github.com/jasoncnm/glfw/tree/c63d4601ad547be6b6559ec1e792ec3586ab47c2)
 
  [Lua](https://www.lua.org/)
  
