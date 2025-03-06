@@ -12,6 +12,10 @@
 #include "Engine/Application.h"
 #include "Engine/Layer.h"
 #include "Engine/ImGui/ImGuiLayer.h"
+#include "Engine/Input.h"
+#include "Engine/KeyCode.h"
+#include "Engine/MouseButtonCode.h"
+
 //------------Entry Point--------------------------------
 //------------------------------------------------------
 #include "Engine/EntryPoint.h"

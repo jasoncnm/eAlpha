@@ -7,3 +7,6 @@
 [submodule "eAlpha/vendor/imgui"]
 	path = eAlpha/vendor/imgui
 	url = https://github.com/jasoncnm/imgui
+[submodule "eAlpha/vendor/glm"]
+	path = eAlpha/vendor/glm
+	url = https://github.com/jasoncnm/glm

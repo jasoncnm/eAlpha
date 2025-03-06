@@ -81,17 +81,19 @@ namespace Engine
     private:
         Event & m_Event;
     };
-
+ 
     inline std::string format_as(const Event& event)
     {
         return event.ToString();
     }
 
+#if 0
+    // NOTE: depricated code. used for spdlog but replaced by format_as  
     inline std::ostream & operator<<(std::ostream & os, const Event & event)
     {
         return os << event.ToString();
     }
-    
+#endif    
 
 }
 

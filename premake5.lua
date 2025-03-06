@@ -7,9 +7,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 startproject "SandBox"
 
 IncludeDir = {}
+IncludeDir["spdlog"] = "eAlpha/vendor/spdlog/include"
 IncludeDir["GLFW"] = "eAlpha/vendor/GLFW/include"
 IncludeDir["Glad"] = "eAlpha/vendor/Glad/include"
 IncludeDir["Imgui"] = "eAlpha/vendor/Imgui"
+IncludeDir["glm"] = "eAlpha/vendor/glm"
 
 
 group "Dependencies"
@@ -31,15 +33,19 @@ project "eAlpha"
     pchheader "pch.h"
     pchsource "eAlpha/src/pch.cpp"
 
-    files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
+    files { "%{prj.name}/src/**.h",
+	    "%{prj.name}/src/**.cpp",
+            "%{prj.name}/vendor/glm/glm/**.hpp",
+            "%{prj.name}/vendor/glm/glm/**.inl", }
 
     includedirs
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.spdlog}",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.Imgui}",
+        "%{IncludeDir.glm}",
     }
 
     links
@@ -93,8 +99,9 @@ project "SandBox"
 
     includedirs
     {
-        "eAlpha/vendor/spdlog/include",
-        "eAlpha/src"
+        "%{IncludeDir.spdlog}",
+        "eAlpha/src",
+	"%{IncludeDir.glm}",
     }
 
     links

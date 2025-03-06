@@ -13,7 +13,6 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
-
 namespace Engine
 {
 
@@ -78,20 +77,6 @@ namespace Engine
             {
                 layer->OnUpdate();
             }
-
-            auto[x, y] = Input::GetMousePos();
-            // ENGINE_CORE_TRACE("{0}, {1}", x, y);
-
-            bool LeftMouseDown = Input::IsMousePressed(GLFW_MOUSE_BUTTON_LEFT);
-            // ENGINE_CORE_TRACE("Left Mouse Button Down: {0}", LeftMouseDown);
-
-            bool SpaceKeyDown = Input::IsKeyPressed(GLFW_KEY_SPACE);
-            //ENGINE_CORE_TRACE("Space bar Down: {0}", SpaceKeyDown);
-
-            r32 xpos = Input::GetMouseX();
-            r32 ypos = Input::GetMouseY();
-
-            ENGINE_CORE_TRACE("MOUSE X: {0}, MOUSE Y: {1}", xpos, ypos);
             
             window->OnUpdate();
         }
