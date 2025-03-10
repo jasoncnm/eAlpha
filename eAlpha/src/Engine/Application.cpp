@@ -22,9 +22,12 @@ namespace Engine
     {
         ENGINE_CORE_ASSERT(!instance, "Application already exists!");
         instance = this;
-        
         window = std::unique_ptr<Window>(Window::Create());
         window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
+
+        imGuiLayer = new ImGuiLayer();
+        layerStack.PushOverlay(imGuiLayer);
+        
     }
 
     void Application::PushLayer(Layer * layer)
@@ -77,6 +80,13 @@ namespace Engine
             {
                 layer->OnUpdate();
             }
+
+            imGuiLayer->Begin();
+            for (Layer * layer : layerStack)
+            {
+                layer->OnImGuiRender();
+            }
+            imGuiLayer->End();
             
             window->OnUpdate();
         }

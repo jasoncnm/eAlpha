@@ -20,7 +20,6 @@
 
 #include <stdint.h>
 
-
 #ifdef ENGINE_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

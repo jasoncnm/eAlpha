@@ -102,6 +102,7 @@ project "SandBox"
         "%{IncludeDir.spdlog}",
         "eAlpha/src",
 	"%{IncludeDir.glm}",
+	"eAlpha/vendor",
     }
 
     links

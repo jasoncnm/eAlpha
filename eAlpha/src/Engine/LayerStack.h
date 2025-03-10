@@ -31,7 +31,7 @@ namespace Engine
 
     private:
         std::vector<Layer *> layers;
-        std::vector<Layer *>::iterator layerInsert;
+        u32 layerInsertIndex = 0;
 
     };
 

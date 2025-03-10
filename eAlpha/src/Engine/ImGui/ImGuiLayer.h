@@ -22,25 +22,15 @@ namespace Engine
         ImGuiLayer();
         ~ImGuiLayer();
 
-        ImGuiKey GLFWKeyToImGuiKey(int keycode);
+        virtual void OnAttatch() override;
+        virtual void OnDetach() override;
+        virtual void OnImGuiRender() override;
         
-        void OnAttatch() override;
-        void OnDetach() override;
-
-        void OnUpdate() override;
-        void OnEvent(Event & event) override;
+        void Begin();
+        void End();
 
     private:
         r32 lastTime = 0.0f;
-
-        bool OnMouseButtonPressed(MousePressedEvent & event);
-        bool OnMouseButtonReleased(MouseReleasedEvent & event);
-        bool OnMouseMoved(MouseMovedEvent & event);
-        bool OnMouseScrolled(MouseScrolledEvent & event);
-        bool OnKeyPressed(KeyPressedEvent & event);
-        bool OnKeyReleased(KeyReleasedEvent & event);
-        bool OnKeyTyped(KeyTypedEvent & event);
-        bool OnWindowResize(WindowResizeEvent & event);
 
     };
 }

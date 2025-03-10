@@ -6,7 +6,9 @@
    $Notice: $
    ======================================================================== */
 
+
 #include <Engine.h>
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Engine::Layer
 {
@@ -29,6 +31,14 @@ public:
     {
         //ENGINE_TRACE("{0}", event);
     }
+
+    void OnImGuiRender() override
+    {
+        ImGui::Begin("Test");
+        ImGui::Text("Hello World");
+        ImGui::End();
+    }
+    
 };
 
 class SandBox : public Engine::Application
@@ -37,7 +47,6 @@ public:
     SandBox()
     {
         PushLayer(new ExampleLayer());
-        PushOverlay(new Engine::ImGuiLayer());
     }
     ~SandBox(){}
 }; 
