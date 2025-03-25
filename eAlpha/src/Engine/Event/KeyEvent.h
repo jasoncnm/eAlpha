@@ -12,7 +12,7 @@
 namespace Engine
 {
 
-    class ENGINE_API KeyEvent : public Event
+    class  KeyEvent : public Event
     {
     public:
         inline i32 GetKeyCode() const { return m_KeyCode; }
@@ -27,7 +27,7 @@ namespace Engine
 
     };
 
-    class ENGINE_API KeyPressedEvent : public KeyEvent
+    class  KeyPressedEvent : public KeyEvent
     {
     public:
         KeyPressedEvent(i32 keycode, i32 repeatCount)
@@ -49,7 +49,7 @@ namespace Engine
 
     };
 
-    class ENGINE_API KeyReleasedEvent : public KeyEvent
+    class  KeyReleasedEvent : public KeyEvent
     {
     public:
         KeyReleasedEvent(i32 keycode)
@@ -66,7 +66,7 @@ namespace Engine
 
     };
 
-    class ENGINE_API KeyTypedEvent : public KeyEvent
+    class  KeyTypedEvent : public KeyEvent
     {
 public:
         KeyTypedEvent(i32 keycode)

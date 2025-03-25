@@ -7,7 +7,7 @@
    $Notice: $
    ======================================================================== */
 
-#include "Engine/Core.h"
+#include "pch.h"
 
 namespace Engine
 {
@@ -39,7 +39,7 @@ namespace Engine
 #define EVENT_CLASS_CATEGORY(category) virtual i32 GetCategoryFlags() const override { return category; } \
     enum {}
 
-    class ENGINE_API Event
+    class Event
     {
         friend class EventDispatcher;
     public:

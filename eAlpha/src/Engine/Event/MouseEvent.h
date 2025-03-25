@@ -11,7 +11,7 @@
 
 namespace Engine
 {
-    class ENGINE_API MouseMovedEvent : public Event
+    class  MouseMovedEvent : public Event
     {
     public:
 
@@ -35,7 +35,7 @@ namespace Engine
         r32 mouseX, mouseY;
     };
 
-    class ENGINE_API MouseScrolledEvent : public Event
+    class  MouseScrolledEvent : public Event
     {
     public:
 
@@ -60,7 +60,7 @@ namespace Engine
     };
 
 
-    class ENGINE_API MouseButtonEvent : public Event
+    class  MouseButtonEvent : public Event
     {
     public:
         inline i32 GetButton() const { return button; }
@@ -75,7 +75,7 @@ namespace Engine
     };
 
     
-    class ENGINE_API MousePressedEvent : public MouseButtonEvent
+    class  MousePressedEvent : public MouseButtonEvent
     {
     public:
         MousePressedEvent(i32 button)
@@ -93,7 +93,7 @@ namespace Engine
     };
 
     
-    class ENGINE_API MouseReleasedEvent : public MouseButtonEvent
+    class  MouseReleasedEvent : public MouseButtonEvent
     {
     public:
         MouseReleasedEvent(i32 button)

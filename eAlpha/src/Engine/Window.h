@@ -9,7 +9,6 @@
 
 #include "pch.h"
 
-#include "Core.h"
 #include "Engine/Event/Event.h"
 
 namespace Engine
@@ -25,7 +24,7 @@ namespace Engine
     };
 
     // Interface Representing a desktop system based window
-    class ENGINE_API Window
+    class Window
     {
     public:
         using EventCallbackFn = std::function<void(Event&)>;

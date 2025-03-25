@@ -7,8 +7,6 @@
    $Notice: $
    ======================================================================== */
 
-#include "pch.h"
-
 typedef int8_t i8;
 typedef int16_t i6;
 typedef int32_t i32;

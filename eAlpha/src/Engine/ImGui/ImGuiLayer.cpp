@@ -13,7 +13,6 @@
 #include "backends/imgui_impl_glfw.h"
  
 #include "Engine\Application.h"
-#include "Engine\Log.h"
 
 #include "Engine\Event\MouseEvent.h"
 
@@ -49,7 +48,7 @@ namespace Engine
     {
         ImGuiIO& io = ImGui::GetIO();
         Application & app = Application::Get();
-        io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
+        io.DisplaySize = ImVec2((r32)app.GetWindow().GetWidth(), (r32)app.GetWindow().GetHeight());
         
         // Rendering
         ImGui::Render();

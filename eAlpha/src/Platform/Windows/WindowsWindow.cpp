@@ -8,11 +8,10 @@
 
 #include "pch.h"
 #include "WindowsWindow.h"
-#include "Engine\Log.h"
 #include "Engine\Event\ApplicationEvent.h"
 #include "Engine\Event\KeyEvent.h"
 #include "Engine\Event\MouseEvent.h"
-#include <glad\glad.h>
+#include "Platform\OpenGL\OpenGLContext.h"
 
 namespace Engine
 {
@@ -65,11 +64,10 @@ namespace Engine
             data.title.c_str(),
             nullptr,
             nullptr);
+        ENGINE_CORE_ASSERT(window != nullptr, "Could not create window  ");
 
-        ENGINE_CORE_ASSERT(window != nullptr, "Could not create window£¡");
-        glfwMakeContextCurrent(window);
-        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-        ENGINE_CORE_ASSERT(status, "Failed to initialize Glad!");
+        context = new OpenGLContext(window);        
+        context->Init();
         
         GLFWmonitor * primaryMonitor = glfwGetPrimaryMonitor();
         const GLFWvidmode * videoMode = glfwGetVideoMode(primaryMonitor);
@@ -189,7 +187,7 @@ namespace Engine
     void WindowsWindow::OnUpdate() 
     {
         glfwPollEvents();
-        glfwSwapBuffers(window);
+        context->SwapBuffers();
     }
     
     void WindowsWindow::SetVSync(bool enabled)
@@ -204,7 +202,4 @@ namespace Engine
     {
         return data.VSync;
     }
-
-    
-
 }

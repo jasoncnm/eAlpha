@@ -8,6 +8,8 @@
    ======================================================================== */
 
 #include "Engine/Window.h"
+#include "Engine/Renderer/GraphicsContext.h"
+
 #include <GLFW/glfw3.h>
 
 
@@ -39,6 +41,7 @@ namespace Engine
         virtual void ShutDown();
         
         GLFWwindow * window = nullptr;
+        GraphicsContext * context;
 
         struct WindowData
         {
