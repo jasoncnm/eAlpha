@@ -26,9 +26,12 @@ namespace Engine
 
         void UnBind() const override;
 
+        virtual const BufferLayout & GetLayout() const override { return layout; }
+        virtual void SetLayout(const BufferLayout & layout) override { this->layout = layout; };
+        
     private:
         u32 rendererId;
-        
+        BufferLayout layout;       
     };
 
     class OpenGLIndexBuffer : public IndexBuffer

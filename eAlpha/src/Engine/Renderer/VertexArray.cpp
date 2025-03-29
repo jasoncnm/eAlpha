@@ -5,15 +5,16 @@
    $Creator: Junjie Mao $
    $Notice: $
    ======================================================================== */
+
 #include "pch.h"
-#include "Shader.h"
+#include "VertexArray.h"
 #include "Renderer.h"
-#include "Platform\OpenGL\OpenGLShader.h"
+#include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace Engine
 {
-
-    Shader * Shader::Create(std::string vertexSource, std::string fragmentSource)
+        
+    VertexArray * VertexArray::Create()
     {
         switch (Renderer::GetAPI())
         {
@@ -24,12 +25,12 @@ namespace Engine
             }
             case RendererAPI::API::OpenGL:
             {
-                return new OpenGLShader(vertexSource, fragmentSource);
+                return new OpenGLVertexArray();
             }
         }
         ENGINE_CORE_ASSERT(false, "Unknown Renderer API");
         return nullptr;
+
     }
 
-    
 }

@@ -7,25 +7,21 @@
    $Notice: $
    ======================================================================== */
 
+#include "RenderCommand.h"
+
 namespace Engine
 {
-    enum class RendererAPI
-    {
-        None = 0,
-        OpenGL = 1,
-        D3D11 = 2,
-        D3D12 = 3
-    };
 
     class Renderer
     {
     public:
 
-        inline static RendererAPI GetAPI() { return rendererAPI; }
+        static void BeginScene();
+        static void EndScene();
+        static void Submit(const std::shared_ptr<VertexArray> & vertexArray);
         
-    private:
-        
-        static RendererAPI rendererAPI;
+        inline static RendererAPI::API  GetAPI() { return RendererAPI::GetAPI(); }
+
     };
 }
 

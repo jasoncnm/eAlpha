@@ -1,4 +1,3 @@
-#if !defined(GRAPHICCONTEXT_H)
 /* ========================================================================
    $File: $
    $Date: $
@@ -7,7 +6,10 @@
    $Notice: $
    ======================================================================== */
 
+#include "pch.h"
+#include "RendererAPI.h"
 
-
-#define GRAPHICCONTEXT_H
-#endif
+namespace Engine
+{
+    RendererAPI::API RendererAPI::api = RendererAPI::API::OpenGL;
+}

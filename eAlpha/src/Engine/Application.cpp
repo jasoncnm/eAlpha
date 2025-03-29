@@ -10,8 +10,9 @@
 #include "Engine/Log.h"
 #include "Application.h"
 #include "Input.h"
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
+#include "Renderer/Renderer.h"
+
+#include <glm/glm.hpp>
 
 namespace Engine
 {
@@ -59,46 +60,77 @@ namespace Engine
 
         imGuiLayer = new ImGuiLayer();
         layerStack.PushOverlay(imGuiLayer);
-                
+
+        // --------------------------------------------------
+        // Triangle
+        // --------------------------------------------------
+        
         // Shader
         std::string vertexSrc, fragmentSrc;
-        ExtractShaderSourceCode(vertexSrc, "../eAlpha/src/Engine/Renderer/Assets/OpenGL.vs");
-        ExtractShaderSourceCode(fragmentSrc, "../eAlpha/src/Engine/Renderer/Assets/OpenGL.fs");
-        shader.reset(Shader::Create(vertexSrc, fragmentSrc));
+        ExtractShaderSourceCode(vertexSrc, "../eAlpha/src/Platform/OpenGL/Assets/Triangle.vs");
+        ExtractShaderSourceCode(fragmentSrc, "../eAlpha/src/Platform/OpenGL/Assets/Triangle.fs");
+        triangleShader.reset(Shader::Create(vertexSrc, fragmentSrc));
 
         
         // Vertex Array & Vertex Buffer
-        glGenVertexArrays(1, &vertexArray);
-        glBindVertexArray(vertexArray);
 
-        r32 vertices[3 * 3] =
-            {
-                .0f,  .5f,  .0f,
-                -.5f, -.5f,  .0f,
-                .5f, -.5f,  .0f, 
-            };
-        vertexBuffer[0].reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+        triangleVA.reset(VertexArray::Create());
         
-        u32 attribLocation = shader->GetAttribLocation("position");
-        glEnableVertexAttribArray(attribLocation);
-        glVertexAttribPointer(attribLocation, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-
-        r32 colors[3 * 3] =         
+        r32 vertices[3 * 7] =
             {
-                1.0f,  .0f,  .0f,
-                .0f, 1.0f,  .0f,
-                .0f,  .0f, 1.0f
+                .0f,  .5f,  .0f,  1.0f,  .0f,  .0f, 1.0f,
+                -.5f, -.5f,  .0f,   .0f, 1.0f,  .0f, 1.0f,
+                .5f, -.5f,  .0f,   .0f,  .0f, 1.0f, 1.0f
             };
-        vertexBuffer[1].reset(VertexBuffer::Create(colors, sizeof(colors)));
-        attribLocation = shader->GetAttribLocation("color");
-        glEnableVertexAttribArray(attribLocation);
-        glVertexAttribPointer(attribLocation, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
-        
+        std::shared_ptr<VertexBuffer> triangleVB;
+        std::shared_ptr<IndexBuffer> triangleIB;                
+        triangleVB.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+
+        BufferLayout triangleLayout =
+            {
+                { ShaderDataType::Float3, "position" },
+                { ShaderDataType::Float4, "color" }
+            };
+        triangleVB->SetLayout(triangleLayout);
+
+        triangleVA->AddVertexBuffer(triangleVB);
+
         // Index Buffer
         u32 indices[3] = { 0, 1, 2 };
-        indexBuffer.reset(IndexBuffer::Create(indices, 3));        
-        // indexBuffer.Bind();
+        triangleIB.reset(IndexBuffer::Create(indices, 3));
+        triangleVA->SetIndexBuffer(triangleIB);
+
+        // --------------------------------------------------
+        // Square
+        // --------------------------------------------------
+        std::string blueSquareVS, blueSquareFS;
+        ExtractShaderSourceCode(blueSquareVS, "../eAlpha/src/Platform/OpenGL/Assets/BlueSquare.vs");
+        ExtractShaderSourceCode(blueSquareFS, "../eAlpha/src/Platform/OpenGL/Assets/BlueSquare.fs");
+        blueSquareShader.reset(Shader::Create(blueSquareVS, blueSquareFS));
+
+        blueSquareVA.reset(VertexArray::Create());        
+
+        r32 squareVertices[4 * 3] =
+            {
+                -0.75f, -0.75f, 0.0f,
+                 0.75f, -0.75f, 0.0f,
+                 0.75f, 0.75f, 0.0f,
+                -0.75f, 0.75f, 0.0f
+            };
+        std::shared_ptr<VertexBuffer> blueSquareVB;
+        std::shared_ptr<IndexBuffer> blueSquareIB;
+
+        blueSquareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+
+        BufferLayout blueSquareLayout = { { ShaderDataType::Float3, "position" }};
+        blueSquareVB->SetLayout(blueSquareLayout);
+        blueSquareVA->AddVertexBuffer(blueSquareVB);
+
+        u32 blueSquareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+        blueSquareIB.reset(IndexBuffer::Create(blueSquareIndices, 6));
+        blueSquareVA->SetIndexBuffer(blueSquareIB);
+        
     }
 
     void Application::PushLayer(Layer * layer)
@@ -144,12 +176,19 @@ namespace Engine
     {
         while(Running)
         {
-            glClearColor(.1f, .1f, .1f, 1);
-            glClear(GL_COLOR_BUFFER_BIT);
 
-            shader->Bind();
-            glBindVertexArray(vertexArray);
-            glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+            RenderCommand::SetClearColor({.1f, .1f, .1f, 1});
+            RenderCommand::Clear();
+
+            Renderer::BeginScene();
+
+            blueSquareShader->Bind();
+            Renderer::Submit(blueSquareVA);
+
+            triangleShader->Bind();
+            Renderer::Submit(triangleVA);
+
+            Renderer::EndScene();
             
             for (Layer * layer : layerStack)
             {

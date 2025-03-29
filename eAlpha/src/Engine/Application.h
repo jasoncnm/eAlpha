@@ -14,6 +14,7 @@
 #include "Engine/ImGui/ImGuiLayer.h"
 #include "Engine/Renderer/Shader.h"
 #include "Engine/Renderer/Buffer.h"
+#include "Engine/Renderer/VertexArray.h"
 
 namespace Engine
 {
@@ -40,11 +41,12 @@ namespace Engine
         bool Running = true;
         LayerStack layerStack;
 
-        u32 vertexArray;
+        std::shared_ptr<VertexArray> triangleVA;
+        std::shared_ptr<Shader> triangleShader;
 
-        std::unique_ptr<Shader> shader;
-        std::unique_ptr<VertexBuffer> vertexBuffer[2];
-        std::unique_ptr<IndexBuffer> indexBuffer;
+
+        std::shared_ptr<VertexArray> blueSquareVA;
+        std::shared_ptr<Shader> blueSquareShader;        
         
         static Application * instance;
     
