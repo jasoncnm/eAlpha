@@ -8,7 +8,7 @@
    ======================================================================== */
 
 #include <string>
-
+#include <glm/glm.hpp>
 namespace Engine
 {
     class Shader
@@ -18,6 +18,7 @@ namespace Engine
 
         virtual void Bind() const = 0;
         virtual void UnBind() const = 0;
+        virtual void UploadUniformMat4(const std::string & name, const glm::mat4 & matrix) = 0;
 
         virtual u32 GetAttribLocation(const char * attribName) = 0;
 

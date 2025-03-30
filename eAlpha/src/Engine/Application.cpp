@@ -10,8 +10,7 @@
 #include "Engine/Log.h"
 #include "Application.h"
 #include "Input.h"
-#include "Renderer/Renderer.h"
-
+#include "KeyCode.h"
 #include <glm/glm.hpp>
 
 namespace Engine
@@ -61,76 +60,6 @@ namespace Engine
         imGuiLayer = new ImGuiLayer();
         layerStack.PushOverlay(imGuiLayer);
 
-        // --------------------------------------------------
-        // Triangle
-        // --------------------------------------------------
-        
-        // Shader
-        std::string vertexSrc, fragmentSrc;
-        ExtractShaderSourceCode(vertexSrc, "../eAlpha/src/Platform/OpenGL/Assets/Triangle.vs");
-        ExtractShaderSourceCode(fragmentSrc, "../eAlpha/src/Platform/OpenGL/Assets/Triangle.fs");
-        triangleShader.reset(Shader::Create(vertexSrc, fragmentSrc));
-
-        
-        // Vertex Array & Vertex Buffer
-
-        triangleVA.reset(VertexArray::Create());
-        
-        r32 vertices[3 * 7] =
-            {
-                .0f,  .5f,  .0f,  1.0f,  .0f,  .0f, 1.0f,
-                -.5f, -.5f,  .0f,   .0f, 1.0f,  .0f, 1.0f,
-                .5f, -.5f,  .0f,   .0f,  .0f, 1.0f, 1.0f
-            };
-
-        std::shared_ptr<VertexBuffer> triangleVB;
-        std::shared_ptr<IndexBuffer> triangleIB;                
-        triangleVB.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-
-        BufferLayout triangleLayout =
-            {
-                { ShaderDataType::Float3, "position" },
-                { ShaderDataType::Float4, "color" }
-            };
-        triangleVB->SetLayout(triangleLayout);
-
-        triangleVA->AddVertexBuffer(triangleVB);
-
-        // Index Buffer
-        u32 indices[3] = { 0, 1, 2 };
-        triangleIB.reset(IndexBuffer::Create(indices, 3));
-        triangleVA->SetIndexBuffer(triangleIB);
-
-        // --------------------------------------------------
-        // Square
-        // --------------------------------------------------
-        std::string blueSquareVS, blueSquareFS;
-        ExtractShaderSourceCode(blueSquareVS, "../eAlpha/src/Platform/OpenGL/Assets/BlueSquare.vs");
-        ExtractShaderSourceCode(blueSquareFS, "../eAlpha/src/Platform/OpenGL/Assets/BlueSquare.fs");
-        blueSquareShader.reset(Shader::Create(blueSquareVS, blueSquareFS));
-
-        blueSquareVA.reset(VertexArray::Create());        
-
-        r32 squareVertices[4 * 3] =
-            {
-                -0.75f, -0.75f, 0.0f,
-                 0.75f, -0.75f, 0.0f,
-                 0.75f, 0.75f, 0.0f,
-                -0.75f, 0.75f, 0.0f
-            };
-        std::shared_ptr<VertexBuffer> blueSquareVB;
-        std::shared_ptr<IndexBuffer> blueSquareIB;
-
-        blueSquareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-
-        BufferLayout blueSquareLayout = { { ShaderDataType::Float3, "position" }};
-        blueSquareVB->SetLayout(blueSquareLayout);
-        blueSquareVA->AddVertexBuffer(blueSquareVB);
-
-        u32 blueSquareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-        blueSquareIB.reset(IndexBuffer::Create(blueSquareIndices, 6));
-        blueSquareVA->SetIndexBuffer(blueSquareIB);
-        
     }
 
     void Application::PushLayer(Layer * layer)
@@ -171,25 +100,15 @@ namespace Engine
     {
     }
 
-    
+
+#include <iostream>
+
     void Application::Run()
     {
         while(Running)
         {
 
-            RenderCommand::SetClearColor({.1f, .1f, .1f, 1});
-            RenderCommand::Clear();
-
-            Renderer::BeginScene();
-
-            blueSquareShader->Bind();
-            Renderer::Submit(blueSquareVA);
-
-            triangleShader->Bind();
-            Renderer::Submit(triangleVA);
-
-            Renderer::EndScene();
-            
+            window->OnUpdate();
             for (Layer * layer : layerStack)
             {
                 layer->OnUpdate();
@@ -202,7 +121,6 @@ namespace Engine
             }
             imGuiLayer->End();
             
-            window->OnUpdate();
         }
     }
 

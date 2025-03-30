@@ -15,6 +15,9 @@
 #include "Engine/Input.h"
 #include "Engine/KeyCode.h"
 #include "Engine/MouseButtonCode.h"
+#include "Engine/Renderer/Renderer.h"
+#include "Engine/Renderer/VertexArray.h"
+#include "Engine/Renderer/Shader.h"
 
 //------------Entry Point--------------------------------
 //------------------------------------------------------

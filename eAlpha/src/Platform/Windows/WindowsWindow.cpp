@@ -6,12 +6,14 @@
    $Notice: $
    ======================================================================== */
 
+
 #include "pch.h"
 #include "WindowsWindow.h"
 #include "Engine\Event\ApplicationEvent.h"
 #include "Engine\Event\KeyEvent.h"
 #include "Engine\Event\MouseEvent.h"
 #include "Platform\OpenGL\OpenGLContext.h"
+
 
 namespace Engine
 {
@@ -53,10 +55,8 @@ namespace Engine
             GLFWInitialized = true;
         }
 
-
+        
         glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_FALSE);
-        // glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-
         
         window = glfwCreateWindow(
             data.width,
@@ -68,7 +68,6 @@ namespace Engine
 
         context = new OpenGLContext(window);        
         context->Init();
-        
         GLFWmonitor * primaryMonitor = glfwGetPrimaryMonitor();
         const GLFWvidmode * videoMode = glfwGetVideoMode(primaryMonitor);
         const i32 windowLeft = videoMode->width / 2 - data.width / 2;
@@ -175,7 +174,12 @@ namespace Engine
             MouseScrolledEvent event((r32)xoffset, (r32)yoffset);
             _data.EventCallback(event);
         });
-        
+
+#ifdef GLFW_INCLUDE_VULKAN
+        uint32_t extensionCount = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+        ENGINE_CORE_TRACE("{0}  extensions supported", extensionCount);
+#endif
     }
 
     void WindowsWindow::ShutDown()

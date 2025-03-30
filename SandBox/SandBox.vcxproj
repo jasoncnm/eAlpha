@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>ENGINE_PLATFORM_WINDOWS;ENGINE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\eAlpha\vendor\spdlog\include;..\eAlpha\src;..\eAlpha\vendor\glm;..\eAlpha\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\eAlpha\vendor\spdlog\include;..\eAlpha\vendor\glm;D:\Work\VulkanSDK\1.4.309.0\Include;..\eAlpha\src;..\eAlpha\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -97,7 +97,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>ENGINE_PLATFORM_WINDOWS;ENGINE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\eAlpha\vendor\spdlog\include;..\eAlpha\src;..\eAlpha\vendor\glm;..\eAlpha\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\eAlpha\vendor\spdlog\include;..\eAlpha\vendor\glm;D:\Work\VulkanSDK\1.4.309.0\Include;..\eAlpha\src;..\eAlpha\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -119,7 +119,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>ENGINE_PLATFORM_WINDOWS;ENGINE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\eAlpha\vendor\spdlog\include;..\eAlpha\src;..\eAlpha\vendor\glm;..\eAlpha\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\eAlpha\vendor\spdlog\include;..\eAlpha\vendor\glm;D:\Work\VulkanSDK\1.4.309.0\Include;..\eAlpha\src;..\eAlpha\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -136,6 +136,9 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\SanboxApp.h" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SanboxApp.cpp" />
   </ItemGroup>

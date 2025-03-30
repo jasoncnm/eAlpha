@@ -18,9 +18,10 @@ namespace Engine
         enum class API
         {
             None = 0,
-            OpenGL = 1,
-            D3D11 = 2,
-            D3D12 = 3
+            OpenGL,
+            Vulkan,
+            DX12,
+            DX11,
         };
 
         virtual void SetClearColor(const glm::vec4 & color) = 0;

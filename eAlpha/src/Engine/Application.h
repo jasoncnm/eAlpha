@@ -12,9 +12,6 @@
 #include "Window.h"
 #include "Engine/LayerStack.h"
 #include "Engine/ImGui/ImGuiLayer.h"
-#include "Engine/Renderer/Shader.h"
-#include "Engine/Renderer/Buffer.h"
-#include "Engine/Renderer/VertexArray.h"
 
 namespace Engine
 {
@@ -40,13 +37,6 @@ namespace Engine
         ImGuiLayer * imGuiLayer;
         bool Running = true;
         LayerStack layerStack;
-
-        std::shared_ptr<VertexArray> triangleVA;
-        std::shared_ptr<Shader> triangleShader;
-
-
-        std::shared_ptr<VertexArray> blueSquareVA;
-        std::shared_ptr<Shader> blueSquareShader;        
         
         static Application * instance;
     

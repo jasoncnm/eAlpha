@@ -10,6 +10,10 @@
 #include "Engine/Window.h"
 #include "Engine/Renderer/GraphicsContext.h"
 
+#ifdef ENGINE_API_VULKAN
+#define GLFW_INCLUDE_VULKAN
+#endif
+
 #include <GLFW/glfw3.h>
 
 

@@ -96,6 +96,9 @@
     <ClInclude Include="src\Engine\Renderer\Buffer.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Renderer\Camera.h">
+      <Filter>src\Engine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\Renderer\GraphicsContext.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
@@ -1425,6 +1428,9 @@
       <Filter>src\Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Renderer\Buffer.cpp">
+      <Filter>src\Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Renderer\Camera.cpp">
       <Filter>src\Engine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Renderer\RenderCommand.cpp">
