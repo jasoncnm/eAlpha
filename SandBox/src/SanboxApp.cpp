@@ -87,12 +87,47 @@ public:
 
     }
 
-    void OnUpdate() override
+    void OnUpdate(Engine::TimeStep timeStep) override
     {
+
+        ENGINE_TRACE("Delta Time: {0}s ({1}ms)", timeStep.GetSeconds(), timeStep.GetMilliSeconds());
         
         Engine::RenderCommand::SetClearColor({.1f, .1f, .1f, 1});
         Engine::RenderCommand::Clear();
 
+        r32 speed = 1.0f;
+        
+        if (Engine::Input::IsKeyPressed(E_KEY_W))
+        {
+            cameraPos.y -= speed * timeStep;
+        }
+        else if (Engine::Input::IsKeyPressed(E_KEY_S))
+        {
+            cameraPos.y += speed * timeStep;
+        }
+
+        if (Engine::Input::IsKeyPressed(E_KEY_A))
+        {
+            cameraPos.x += speed * timeStep;
+        }
+        else if (Engine::Input::IsKeyPressed(E_KEY_D))
+        {
+            cameraPos.x -= speed * timeStep;
+        }
+
+        r32 rotSpeed = 30.0f;
+        if (Engine::Input::IsKeyPressed(E_KEY_E))
+        {
+            cameraRot += rotSpeed * timeStep;
+        }
+        else if (Engine::Input::IsKeyPressed(E_KEY_Q))
+        {
+            cameraRot -= rotSpeed * timeStep;
+        }
+        
+        camera.SetPosition(cameraPos);
+        camera.SetRotation(cameraRot);
+        
         Engine::Renderer::BeginScene(camera);
             
         Engine::Renderer::Submit(blueSquareShader, blueSquareVA);
@@ -108,11 +143,7 @@ public:
     
     void OnEvent(Engine::Event & event) override
     {
-        //ENGINE_TRACE("{0}", event);
-        Engine::EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<Engine::KeyPressedEvent>(BIND_EVENT_FUNCTION(ExampleLayer::OnKeyPressedEvent));
-        dispatcher.Dispatch<Engine::KeyReleasedEvent>(BIND_EVENT_FUNCTION(ExampleLayer::OnKeyReleaseEvent));
-        dispatcher.Dispatch<Engine::MouseMovedEvent>(BIND_EVENT_FUNCTION(ExampleLayer::OnMouseMovedEvent));
+
     }
 
     bool OnKeyPressedEvent(Engine::KeyPressedEvent & event)
@@ -166,6 +197,8 @@ private:
     Engine::OrthographicCamera camera;
 
     glm::vec3 cameraPos;
+
+    r32 cameraRot = 0.0f;
     
 };
 

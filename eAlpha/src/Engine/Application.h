@@ -32,11 +32,16 @@ namespace Engine
         
     private:
     
-        bool OnWindowClose(WindowCloseEvent& event);
-        std::unique_ptr<Window> window;
-        ImGuiLayer * imGuiLayer;
         bool Running = true;
+        bool OnWindowClose(WindowCloseEvent& event);
+
+        std::unique_ptr<Window> window;
+
+        ImGuiLayer * imGuiLayer;
+
         LayerStack layerStack;
+
+        r32 lastFrameTime;
         
         static Application * instance;
     

@@ -11,7 +11,10 @@
 #include "Application.h"
 #include "Input.h"
 #include "KeyCode.h"
+#include "TimeStep.h"
+
 #include <glm/glm.hpp>
+#include <GLFW/glfw3.h>
 
 namespace Engine
 {
@@ -56,6 +59,7 @@ namespace Engine
         instance = this;
         window = std::unique_ptr<Window>(Window::Create());
         window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
+        window->SetVSync(false);
 
         imGuiLayer = new ImGuiLayer();
         layerStack.PushOverlay(imGuiLayer);
@@ -108,10 +112,13 @@ namespace Engine
         while(Running)
         {
 
-            window->OnUpdate();
+            r32 time = (r32)glfwGetTime();
+            TimeStep timeStep = time - lastFrameTime;
+            lastFrameTime = time;
+            
             for (Layer * layer : layerStack)
             {
-                layer->OnUpdate();
+                layer->OnUpdate(timeStep);
             }
 
             imGuiLayer->Begin();
@@ -120,6 +127,8 @@ namespace Engine
                 layer->OnImGuiRender();
             }
             imGuiLayer->End();
+
+            window->OnUpdate();
             
         }
     }
