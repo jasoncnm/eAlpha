@@ -24,7 +24,9 @@
 
 # Quick Start
 
-After building the project, open eAlpha.sln with vs2022 
+After building the project,
+
+open eAlpha.sln with Visual Studio 2022 
 
 or
 
