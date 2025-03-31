@@ -18,7 +18,8 @@
  
 # Building Project
  In Windows Command Prompt run:
- 
+
+    $ configure.bat
     $ build.bat
 
 # Quick Start
