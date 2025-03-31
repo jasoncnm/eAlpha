@@ -16,11 +16,10 @@
 
  [Premake5](https://github.com/premake/premake-core)
  
-# Building Project
+# Building Visual Studio 2022 Project
  In Windows, run:
-
+ 
     $ configure.bat
-    $ build.bat
 
 # Quick Start
 
@@ -28,6 +27,3 @@ After building the project,
 
 open eAlpha.sln with Visual Studio 2022 
 
-or
-
-run .\bin\Debug-windows-x86_64\SandBox.exe
