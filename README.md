@@ -15,6 +15,8 @@
  [SPDLOG](https://github.com/gabime/spdlog/tree/3335c380a08c5e0f5117a66622df6afdb3d74959)
 
  [Premake5](https://github.com/premake/premake-core)
+
+ [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
  
 # Building Visual Studio 2022 Project
  In Windows, run:
