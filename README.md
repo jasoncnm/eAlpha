@@ -23,4 +23,4 @@
     $ build.bat
 
 # Quick Start
-After building the project, open eAlpha.sln with vs2022
+After building the project, open eAlpha.sln with vs2022 or run .\bin\Debug-windows-x86_64\SandBox
