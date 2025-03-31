@@ -17,7 +17,7 @@
  [Premake5](https://github.com/premake/premake-core)
  
 # Building Project
- In Windows Command Prompt run:
+ In Windows, run:
 
     $ configure.bat
     $ build.bat
