@@ -8,20 +8,26 @@ startproject "SandBox"
 
 VULKAN_SDK = os.getenv("VULKAN_SDK")
 
+print(VULKAN_SDK)
+
 IncludeDir = {}
-IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 IncludeDir["spdlog"] = "eAlpha/vendor/spdlog/include"
 IncludeDir["GLFW"] = "eAlpha/vendor/GLFW/include"
 IncludeDir["Glad"] = "eAlpha/vendor/Glad/include"
 IncludeDir["Imgui"] = "eAlpha/vendor/Imgui"
 IncludeDir["glm"] = "eAlpha/vendor/glm"
 
+Library = {}
+
+if VULKAN_SDK ~= nil then
 LibraryDir = {}
+
+IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 LibraryDir["VulkanSDK"] = "%{VULKAN_SDK}/Lib"
 
-Library = {}
 Library["Vulkan"] = "%{LibraryDir.VulkanSDK}/vulkan-1.lib"
 
+end
 
 group "Dependencies"
      include "eAlpha/vendor/GLFW"
@@ -64,9 +70,12 @@ project "eAlpha"
         "GLFW",
         "Glad",
         "Imgui",
-        "%{Library.Vulkan}",
         "opengl32.lib"
     }
+
+if VULKAN_SDK ~= nil then
+links { "%{Library.Vulkan}", }
+end
 
     filter "system:windows"
         systemversion "latest"
@@ -108,9 +117,9 @@ project "SandBox"
     {
         "%{IncludeDir.spdlog}",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.VulkanSDK}",
-	    "eAlpha/src",
-	    "eAlpha/vendor",
+	 "eAlpha/src",
+	 "eAlpha/vendor",
+         "%{IncludeDir.VulkanSDK}"
     }
 
     links
