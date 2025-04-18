@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "eAlpha/vendor/GLFW/include"
 IncludeDir["Glad"] = "eAlpha/vendor/Glad/include"
 IncludeDir["Imgui"] = "eAlpha/vendor/Imgui"
 IncludeDir["glm"] = "eAlpha/vendor/glm"
+IncludeDir["stb_image"] = "eAlpha/vendor/stb_image"
 
 Library = {}
 
@@ -51,8 +52,12 @@ project "eAlpha"
 
     files { "%{prj.name}/src/**.h",
 	        "%{prj.name}/src/**.cpp",
+            "%{prj.name}/vendor/stb_image/**.cpp",
+            "%{prj.name}/vendor/stb_image/**.h",
             "%{prj.name}/vendor/glm/glm/**.hpp",
-            "%{prj.name}/vendor/glm/glm/**.inl", }
+            "%{prj.name}/vendor/glm/glm/**.inl", 
+        
+        }
 
     includedirs
     {
@@ -62,6 +67,7 @@ project "eAlpha"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.Imgui}",
         "%{IncludeDir.glm}",
+        "%{IncludeDir.stb_image}",
         "%{IncludeDir.VulkanSDK}",
     }
 
@@ -111,7 +117,7 @@ project "SandBox"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
+    files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp", "%{prj.name}/src/Assets/**.vs", "%{prj.name}/src/Assets/**.fs"}
 
     includedirs
     {

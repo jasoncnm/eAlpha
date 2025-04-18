@@ -7,6 +7,8 @@
    $Notice: $
    ======================================================================== */
 
+#include <memory> 
+
 #ifdef ENGINE_PLATFORM_WINDOWS
 
 #else
@@ -29,6 +31,15 @@
 #define BIT(x) (1 << x)
 #define BIND_EVENT_FUNCTION(X) std::bind(&X, this, std::placeholders::_1)
 
+namespace Engine
+{
+    template<typename T>
+    using Scope = std::unique_ptr<T>;
+
+    template<typename T>
+    using Ref = std::shared_ptr<T>;
+    
+}
 
 #define CORE_H
 #endif

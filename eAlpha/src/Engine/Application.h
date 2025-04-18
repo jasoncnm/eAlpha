@@ -25,8 +25,6 @@ namespace Engine
         void PushLayer(Layer * layer);
         void PushOverlay(Layer * overlay);
 
-        void ExtractShaderSourceCode(std::string & shaderSource, const std::string & filePath);
-
         inline static Application& Get() { return *instance; }
         inline Window & GetWindow() { return *window; }
         

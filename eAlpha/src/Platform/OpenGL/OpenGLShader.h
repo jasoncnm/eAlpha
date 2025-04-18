@@ -22,9 +22,18 @@ namespace Engine
 
         virtual void Bind() const override;
         virtual void UnBind() const override;
-        virtual void UploadUniformMat4(const std::string & name, const glm::mat4 & matrix) override;
 
-        virtual u32 GetAttribLocation(const char * attribName);
+        void UploadUniformInt(const std::string & name, const i32 value);
+
+        void UploadUniformFloat (const std::string & name, const r32       & value);
+        void UploadUniformFloat2(const std::string & name, const glm::vec2 & value);
+        void UploadUniformFloat3(const std::string & name, const glm::vec3 & value);
+        void UploadUniformFloat4(const std::string & name, const glm::vec4 & value);
+
+        void UploadUniformMat3(const std::string & name, const glm::mat3 & matrix);
+        void UploadUniformMat4(const std::string & name, const glm::mat4 & matrix);
+
+        u32 GetAttribLocation(const char * attribName);
 
     private:
         u32 rendererId;

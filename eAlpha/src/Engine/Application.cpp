@@ -12,6 +12,7 @@
 #include "Input.h"
 #include "KeyCode.h"
 #include "TimeStep.h"
+#include "Renderer/Renderer.h"
 
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
@@ -20,38 +21,6 @@ namespace Engine
 {
 
     Application * Application::instance = nullptr;
-
-    void Application::ExtractShaderSourceCode(std::string & shaderSource, const std::string & filePath)
-    {
-        std::ifstream file;
-
-        file.open(filePath.c_str());
-
-        if (!file)
-        {
-            char buffer[1024];
-            
-            if (_getcwd(buffer, 1024) != NULL)
-            {        
-                std::cout << "Current Directory: " << buffer << std::endl;
-            }
-
-            ENGINE_CORE_ERROR("filepath: {0}", filePath);
-            ENGINE_CORE_ASSERT(false, "Failed to open file");
-        }
-        std::stringstream strBuffer;
-        std::string str;
-
-        while(file.good()) {
-            getline(file, str, '\r');
-            strBuffer << str;
-        }
-        file.close();
-
-        strBuffer << '\0';  // Append null terminator.
-
-        shaderSource = strBuffer.str();
-    }
     
     Application::Application()
     {
@@ -61,6 +30,8 @@ namespace Engine
         window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
         window->SetVSync(false);
 
+        Renderer::Init();
+        
         imGuiLayer = new ImGuiLayer();
         layerStack.PushOverlay(imGuiLayer);
 

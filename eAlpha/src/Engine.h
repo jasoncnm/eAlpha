@@ -19,6 +19,7 @@
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Renderer/VertexArray.h"
 #include "Engine/Renderer/Shader.h"
+#include "Engine/Renderer/Texture.h"
 
 //------------Entry Point--------------------------------
 //------------------------------------------------------
