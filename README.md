@@ -21,7 +21,7 @@
 # Building Visual Studio 2022 Project
  In Windows, run:
  
-    $ configure.bat
+    $ configure-2022.bat
 
 # Quick Start
 
